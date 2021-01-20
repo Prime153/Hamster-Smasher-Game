@@ -10,17 +10,17 @@ html {
 body {
     margin: 0;
     padding: 0;
-    cursor: url(./hammer.png),default;
+    cursor: url(./images//hammer.png),default;
 }
 
 .background {
-    background-image: url(./background.jpg);
+    background-image: url(./images/background.jpg);
     animation: loader 10s steps(1000) infinite;
 }
 
 .wrapper-background {
     overflow: auto;
-    background-image: url(./background.jpg);
+    background-image: url(./images/background.jpg);
     background-repeat: repeat-x;
     width: 100%;
     height: 100%;

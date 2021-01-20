@@ -9,17 +9,17 @@ Nodelist.forEach(event => {
     addEventListener("click", event => {
         if (event.target.classList.contains("Easy")) {
             change()
-            level = 4000
-            level2 = 16000
+            level = 2000
+            level2 = 12000
             console.log(level,level2)
         } else if (event.target.classList.contains("Normal")) {
             change()
-            level = 2000
-            level2 = 10000
+            level = 1500
+            level2 = 8000
         } else if (event.target.classList.contains("Hamster")) {
             change()
             level = 1000
-            level2 = 6000
+            level2 = 5000
         }
     })
 })
@@ -90,10 +90,10 @@ function smashed(event) {
     //Take data
     const hamster = hamsters[parseInt(event.target.dataset.index)]
     
-    hamster.source.style.cursor = "url(./hammer.png),default" 
+    hamster.source.style.cursor = "url(./images/hammer.png),default" 
     hamster.status = "smashed"
     hamster.next = normal(level);
-    hamster.source.children[0].src = './hamster-smashed2.png'
+    hamster.source.children[0].src = './images/hamster-smashed2.png'
 
 
     points++    
@@ -119,14 +119,14 @@ nextFrame()
 
 function nextStatus(hamsters) {
     if(hamsters.status === "normal") {
-        hamsters.source.children[0].src = './hamster2.png'
+        hamsters.source.children[0].src = './images/hamster2.png'
         hamsters.source.classList.add("hide")
         hamsters.status = "gone"
         hamsters.next = gone(level,level2)
 
     } else if(hamsters.status === "gone") {
         hamsters.source.classList.remove("hide")
-        hamsters.source.style.cursor = "url(./hammer-smash.png),pointer" 
+        hamsters.source.style.cursor = "url(./images/hammer-smash.png),pointer" 
         hamsters.status = "normal"
         hamsters.next = normal(level)
        
