@@ -1,0 +1,131 @@
+html {
+    box-sizing: inherit;
+    
+}
+
+*,*::after,*::before {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    cursor: url(./hammer.png),default;
+}
+
+.background {
+    background-image: url(./background.jpg);
+    animation: loader 10s steps(1000) infinite;
+}
+
+.wrapper-background {
+    overflow: auto;
+    background-image: url(./background.jpg);
+    background-repeat: repeat-x;
+    width: 100%;
+    height: 100%;
+}
+
+.level-wrapper {
+    cursor: default;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+span {
+    font-size: 4rem;
+    padding: 40px 0;
+}
+
+.centring {
+    border-radius: 20px;
+    padding:  50px;
+    background-color: blue;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+button {
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 4rem;
+}
+
+[class*="-container"] {
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.hole-zone {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    border-radius: 50%;
+
+}
+
+.hole-zone:nth-child(odd) {
+    flex: 0 0 18%;
+    justify-content:center;
+    
+}
+
+.hole-zone:nth-child(even) {
+    flex: 0 0 15%;
+    justify-content: center;
+}
+
+#hole-0 {
+   position: relative;
+   left: 35%; 
+}
+
+#hole-1 {
+    position: relative;
+    left: 50%;
+    top: 30%;
+}
+
+#hole-2 {
+   position: relative;
+   left: 11%;
+   bottom: 30%; 
+}
+
+#hole-3 {
+    position: relative;
+    left: 60%;
+    top: 10%;
+}
+
+#hole-4 {
+    position: relative;
+    left: 40%;
+    bottom: 20%;
+}
+
+#hole-5 {
+    position: relative;
+    left: 10%;
+    top: 10%;
+}
+
+.hide {
+    display: none;
+}
+
+@keyframes loader {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: -1280px;
+  }
+}
