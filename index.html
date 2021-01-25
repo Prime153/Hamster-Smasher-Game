@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HamsterSmasher</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
     <div class="level-wrapper background">
@@ -17,9 +20,9 @@
     </div>
     <div class="wrapper-background hide">
         <div class="meter-container">
-            <div class="hamster-meter">
-                <img src="#" alt="score-meter" class="meter">
-            </div>
+            <div class="hamster-meter"></div>
+            <p class="score">Score:<span class="score-value"> 0 </span>/ 20 000</P> 
+            <img src="./images/combo.png" alt="combo" class="combo">
         </div>   
         <div class="holes-container ">
             <div class="hole-zone">
@@ -54,6 +57,5 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>

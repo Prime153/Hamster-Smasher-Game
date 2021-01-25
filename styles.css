@@ -5,6 +5,7 @@ html {
 
 *,*::after,*::before {
     box-sizing: border-box;
+    font-family: 'Potta One', cursive;
 }
 
 body {
@@ -44,7 +45,6 @@ span {
 .centring {
     border-radius: 20px;
     padding:  50px;
-    background-color: blue;
     display: flex;
     flex-flow: column wrap;
 }
@@ -53,7 +53,15 @@ button {
     margin: 10px;
     border-radius: 10px;
     padding: 10px;
-    font-size: 4rem;
+    font-size: 3rem;
+    border: none;
+    transition: background-color 0.5s ease-out;
+
+}
+
+button:hover {
+    background-color: black;
+    color: white;
 }
 
 [class*="-container"] {
@@ -129,3 +137,31 @@ button {
     background-position: -1280px;
   }
 }
+
+.score, .score-value {
+    margin: 0 10px;
+    padding: 0;
+    font-size: 40px;
+    justify-self: center;
+}
+
+
+.meter {
+    background-image: url(./images/hearth.png);
+}
+
+.meter-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.combo {
+    visibility: hidden;
+    margin-right: 100px;
+    width: 300px;
+    height:300px;
+}
+
+
+
