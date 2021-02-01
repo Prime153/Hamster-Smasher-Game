@@ -1,3 +1,4 @@
+"use strict";
 
 const Nodelist = document.querySelectorAll(".difficulty");
 let level = 0;
