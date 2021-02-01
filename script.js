@@ -1,3 +1,4 @@
+"use strict";
 
 const Nodelist = document.querySelectorAll(".difficulty");
 let level = 0;
@@ -52,9 +53,9 @@ function hearth() {
     Hearth.src = "./images/hearth.png";
     document.querySelector(".hamster-meter").appendChild(Hearth);
   }
-} 
+} //Event after hamster hit
 
-//Event after hamster hit
+
 document.querySelector('.holes-container').addEventListener('click', event => {
   if (lifes === 1) {
     lose();
@@ -91,12 +92,16 @@ const hamsters = [{
 function change() {
   document.querySelector(".background").classList.add("hide");
   document.querySelector(".wrapper-background").classList.remove("hide");
-} 
+} //Time events
 
-//Time events
-const normal = level => Date.now() + level;
-const gone = (level, levelDelay) => Date.now() + Math.floor(Math.random() * levelDelay) + level;
 
+function normal(level) {
+  return Date.now() + level;
+}
+
+function gone(level, levelDelay) {
+  return Date.now() + Math.floor(Math.random() * levelDelay) + level;
+}
 
 function smashed(event) {
   if (event.target.tagName !== "IMG") {
@@ -104,16 +109,15 @@ function smashed(event) {
     lifes--;
     combo = 0;
     return "";
-  }
-  
-  // Take data
+  } //  Take data
+
+
   const hamster = hamsters[parseInt(event.target.dataset.index)];
   hamster.source.style.cursor = "url(./images/hammer.png),default";
   hamster.status = "smashed";
   hamster.next = normal(level);
-  hamster.source.children[0].src = './images/hamster-smashed2.png'; 
-  
-  // Score counting and combo meter
+  hamster.source.children[0].src = './images/hamster-smashed2.png'; // Score counting and combo meter
+
   combo++;
   score = score + 1000;
   console.log(score);
@@ -122,7 +126,7 @@ function smashed(event) {
   if (combo % 3 === 0) {
     console.log("combo!");
     score = score + 2000;
-  } /
+  } // document.querySelector('.worm-container').style.width = `${10 * score}%`
 
 }
 
@@ -131,12 +135,10 @@ function lose() {
   console.log("koniec");
 }
 
-function win() {
-  // TODO
-} 
+function win() {// TODO
+} //  change hamster
 
 
-//  change hamster
 function nextFrame() {
   hamsters.map(event => {
     if (event.next <= Date.now()) {
