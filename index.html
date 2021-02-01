@@ -1,53 +1,56 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="./favicon.png"/>
-    <title>Game</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Fredoka+One&display=swap" rel="stylesheet"> 
+    <title>HamsterSmasher</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="main.js"></script>
-    <script defer src="confetti.min.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="background">
-        <div class="wrapper">
-            <div class="center">
-                <div class="row-1">
-                    <label>
-                        <span class="titles">Podaj zakres liczb</span>
-                        <p><input type="number" class="min" min="0" placeholder="Min" value=" "> <span class="titles">do</span> <input type="number" class="max" min="2"  placeholder="Max" value=" "></p>
-                    </label>
-                </div>
-                <div class="row-2">
-                    <label>
-                        <span class="titles">Podaj liczbę żyć</span>
-                        <p><input type="number" class="lifes-number" min="1" placeholder="Life"></p>
-                    </label>
-                </div>
-                <div class="button-area">
-                    <button class="start-button">Start</button>
+    <div class="level-wrapper background">
+        <div class="centring">
+            <span class="level">Choose level difficulty</span>
+            <button class="difficulty Easy">Easy</button>
+            <button class="difficulty Normal">Normal</button>
+            <button class="difficulty Hamster">Can I run Hamster?</button>
+        </div>
+    </div>
+    <div class="wrapper-background hide">
+        <div class="meter-container">
+            <div class="hamster-meter">
+                <!-- <img src="./images/hearth.png" alt="score-meter" class="meter"> -->
+            </div>
+        </div>   
+        <div class="holes-container ">
+            <div class="hole-zone">
+                <div id="hole-0">
+                    <img src="./images/hamster2.png"  value="0"  data-index="0" class="hamster">
                 </div>
             </div>
-        </div>
-        <div class="wrapper2 hidden">
-            <div class="center">
-                <div class="row-1">
-                    <label>
-                        <span class="titles">Została wylosowana liczba z zakresu: <p class="numerical-range"></p></span>
-                    </label>
+            <div class="hole-zone">
+                <div id="hole-1" >
+                    <img src="./images/hamster2.png" value="1"  data-index="1" class="hamster">
                 </div>
-                <div class="row-2">
-                    <label>
-                        <span class="titles">Zgadnij liczbę </span>
-                        <p><input type="number" class="players-answer"></p>
-                        <span class="win"></span>
-                    </label>
+            </div>
+            <div class="hole-zone">
+                <div id="hole-2" >
+                    <img src="./images/hamster2.png"  value="2"  data-index="2" class="hamster">
                 </div>
-                <div class="button-area">
-                    <button class="play-again hidden">Zagrajmy jeszcze raz!</button><button class="check-button">Sprawdź</button>
+            </div>
+            <div class="hole-zone">
+                <div id="hole-3" >
+                    <img src="./images/hamster2.png"  value="3" data-index="3" class="hamster">
+                </div>
+            </div>
+            <div class="hole-zone">
+                <div id="hole-4" >
+                    <img src="./images/hamster2.png" value="4"  data-index="4" class="hamster">
+                </div>
+            </div>
+            <div class="hole-zone">
+                <div id="hole-5" >
+                    <img src="./hamster2.png" value="5" data-index="5" class="hamster">
                 </div>
             </div>
         </div>
