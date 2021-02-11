@@ -1,165 +1,223 @@
+const $ = selector => document.querySelector(selector)
+
 const Nodelist = document.querySelectorAll(".difficulty");
-let level = 0;
-let levelDelay = 0;
+const scoreValue = $(".score-value");
+
 let score = 0;
 let combo = 0;
-let HearthMeter = 0;
 let lifes = 0;
-Nodelist.forEach(event => {
-  addEventListener("click", event => {
+
+for(let elem of Nodelist) {
+  elem.addEventListener("click", event => {
     if (event.target.classList.contains("Easy")) {
-      easyMode();
+      const easy = new Level(7,2000,12000);
+      lifes = 7;
+      easy.createHearth();
+      easy.nextFrame();
+
     } else if (event.target.classList.contains("Normal")) {
-      normalMode();
+      const normal = new Level(5,1500,8000);
+      lifes = 5;
+      normal.createHearth();
+      normal.nextFrame();
     } else if (event.target.classList.contains("Hamster")) {
-      hardMode();
+      const hard = new Level(3,1000,5000);
+      lifes = 3;
+      hard.createHearth();
+      hard.nextFrame();
     }
   });
-});
-
-function easyMode() {
-  HearthMeter = 3;
-  lifes = 9;
-  level = 2000;
-  levelDelay = 12000;
-  hearth();
-  change();
 }
 
-function normalMode() {
-  HearthMeter = 2;
-  lifes = 6;
-  level = 1500;
-  levelDelay = 8000;
-  change();
-  hearth();
-}
-
-function hardMode() {
-  HearthMeter = 1;
-  lifes = 3;
-  level = 1000;
-  levelDelay = 5000;
-  change();
-  hearth();
-}
-
-function hearth() {
-  for (let i = 0; i < HearthMeter; i++) {
-    const Hearth = document.createElement("img");
-    Hearth.classList.add("meter");
-    Hearth.src = "./images/hearth.png";
-    document.querySelector(".hamster-meter").appendChild(Hearth);
+class Level {
+  constructor(hearthMeter,level,levelDelay) {
+    this.hearthMeter = hearthMeter;
+    this.level = level;
+    this.levelDelay = levelDelay;
+    this.hamsters  = [{
+      status: "normal",
+      next: this.normal(this.level),
+      source: $("#hole-0")
+    }, {
+      status: "normal",
+      next: this.normal(this.level),
+      source: $("#hole-1")
+    }, {
+      status: "normal",
+      next: this.normal(this.level),
+      source:$("#hole-2")
+    }, {
+      status: "normal",
+      next: this.normal(this.level),
+      source: $("#hole-3")
+    }, {
+      status: "normal",
+      next: this.normal(this.level),
+      source: $("#hole-4")
+    }, {
+      status: "normal",
+      next: this.normal(this.level),
+      source: $("#hole-5")
+    }];
   }
-} //Event after hamster hit
-
-
-document.querySelector('.holes-container').addEventListener('click', event => {
-  if (lifes === 1) {
-    lose();
-  } else {
-    smashed(event);
+  createHearth() {
+    for (let i = 0; i < this.hearthMeter; i++) {
+      const Hearth = document.createElement("img");
+      Hearth.classList.add("meter");
+      Hearth.src = "./images/hearth.png";
+     $(".hamster-meter").appendChild(Hearth);
+    }
+    change();
   }
-});
-const hamsters = [{
-  status: "normal",
-  next: normal(level),
-  source: document.querySelector("#hole-0")
-}, {
-  status: "normal",
-  next: normal(level),
-  source: document.querySelector("#hole-1")
-}, {
-  status: "normal",
-  next: normal(level),
-  source: document.querySelector("#hole-2")
-}, {
-  status: "normal",
-  next: normal(level),
-  source: document.querySelector("#hole-3")
-}, {
-  status: "normal",
-  next: normal(level),
-  source: document.querySelector("#hole-4")
-}, {
-  status: "normal",
-  next: normal(level),
-  source: document.querySelector("#hole-5")
-}];
+  normal() {
+    return  Date.now() + this.level;
+  }
+  gone() {
+    return Date.now() + Math.floor(Math.random() * this.levelDelay) + this.level;
+  }
+  nextFrame() {
+    this.hamsters.map(event => {
+      if (event.next <= Date.now()) {
+        this.nextStatus(event)
+        console.log("działa jadymy dalej");
+      }
+    })
+    requestAnimationFrame(this.nextFrame.bind(this));
+  }
+  nextStatus(hamster = this.hamsters) {
+    if (hamster.status === "normal" || hamster.status === "smashed") {
+      hamster.source.children[0].src = './images/hamster2.png';
+      hamster.source.classList.add("hide");
+      hamster.status = "gone";
+      hamster.next = this.gone(this.level, this.levelDelay);
+    } else if (hamster.status === "gone") {
+      hamster.source.classList.remove("hide");
+      hamster.source.style.cursor = "url(./images/hammer-smash.png),pointer";
+      hamster.status = "normal";
+      hamster.next = this.normal(this.level);
+    }
+  }
+}
+
+class Hit extends Level {
+  smashed(event) {
+    if (event.target.tagName !== "IMG") {
+      $(".hamster-meter").removeChild($(".meter"));
+      combo = 0;
+      lifes--;
+      console.log(lifes);
+      return "";
+    } 
+  
+    const hamster = this.hamsters[parseInt(event.target.dataset.index)];
+    hamster.source.style.cursor = "url(./images/hammer.png),default";
+    hamster.status = "smashed";
+    hamster.next = super.normal(this.level);
+    hamster.source.children[0].src = './images/hamster-smashed2.png'; // Score counting and combo meter
+    combo++;
+    score = score + 1000;
+    
+    console.log(score);
+    console.log(combo);
+  
+    if (combo % 3 === 0) {
+      $(".combo").style.visibility = "visible"
+      setTimeout(() => { 
+        $(".combo").style.visibility = "hidden"
+      }, 2000)
+      score = score + 2000;
+    } 
+    if(score === 20000) {
+      gameOver.win();
+    }
+    $(".score-value").innerText = score;
+  }
+}
+
+class GameOver {
+  
+  win() {
+    $(".level-answer").innerText = "You win!"
+    $(".background").classList.remove("hide");
+    $(".win-wrapper").classList.remove("hide")
+    $(".wrapper-background").classList.add("hide");
+    $ (".centring").classList.add("hide")
+    $(".score-value").innerText = 20000;
+    $(".play-again").addEventListener("click", () => {
+      location.reload(true)
+
+    })
+  }
+  lose() {
+    this.win()
+    $(".level-answer").innerText = "You lose!"
+  }
+}
+
+class Smash  {
+  click() {
+    $('.holes-container').addEventListener('click', event => {
+      if (lifes === 1) {
+        gameOver.lose();
+      } else {
+        const hit = new Hit();
+        hit.smashed(event);
+    }
+  })}
+}
+
+const gameOver = new GameOver();
+const click = new Smash();
+click.click();
 
 function change() {
-  document.querySelector(".background").classList.add("hide");
-  document.querySelector(".wrapper-background").classList.remove("hide");
-} //Time events
+  $(".background").classList.add("hide");
+  $(".wrapper-background").classList.remove("hide");
+} 
 
 
-function normal(level) {
-  return Date.now() + level;
-}
-
-function gone(level, levelDelay) {
-  return Date.now() + Math.floor(Math.random() * levelDelay) + level;
-}
-
-function smashed(event) {
-  if (event.target.tagName !== "IMG") {
-    document.querySelector(".hamster-meter").removeChild(document.querySelector(".meter"));
-    lifes--;
-    combo = 0;
-    return "";
-  } //  Take data
 
 
-  const hamster = hamsters[parseInt(event.target.dataset.index)];
-  hamster.source.style.cursor = "url(./images/hammer.png),default";
-  hamster.status = "smashed";
-  hamster.next = normal(level);
-  hamster.source.children[0].src = './images/hamster-smashed2.png'; // Score counting and combo meter
 
-  combo++;
-  score = score + 1000;
-  console.log(score);
-  console.log(combo);
+// class HearthMeterCreator {
+//   constructor(hearthMeter){
+//     this.hearthMeter = hearthMeter
+//   }
+//   createHearth() {
+//     for (let i = 0; i < this.hearthMeter; i++) {
+//       const Hearth = document.createElement("img");
+//       Hearth.classList.add("meter");
+//       Hearth.src = "./images/hearth.png";
+//       document.querySelector(".hamster-meter").appendChild(Hearth);
+//     }
+//     change()
+//   }
+// }
 
-  if (combo % 3 === 0) {
-    console.log("combo!");
-    score = score + 2000;
-  } // document.querySelector('.worm-container').style.width = `${10 * score}%`
-
-}
-
-function lose() {
-  // TODO
-  console.log("koniec");
-}
-
-function win() {// TODO
-} //  change hamster
-
-
-function nextFrame() {
-  hamsters.map(event => {
-    if (event.next <= Date.now()) {
-      nextStatus(event);
-    }
-  });
-  requestAnimationFrame(nextFrame);
-}
-
-nextFrame();
-
-function nextStatus(hamsters) {
-  if (hamsters.status === "normal") {
-    hamsters.source.children[0].src = './images/hamster2.png';
-    hamsters.source.classList.add("hide");
-    hamsters.status = "gone";
-    hamsters.next = gone(level, levelDelay);
-  } else if (hamsters.status === "gone") {
-    hamsters.source.classList.remove("hide");
-    hamsters.source.style.cursor = "url(./images/hammer-smash.png),pointer";
-    hamsters.status = "normal";
-    hamsters.next = normal(level);
-  } else if (hamsters.status === "smashed") {
-    hamsters.status = "normal";
-  }
-}
+// const normal =  level =>  Date.now() + level;
+// const gone = (level, levelDelay) =>  Date.now() + Math.floor(Math.random() * levelDelay) + level;
+// const hamsters = [{
+  //   status: "normal",
+  //   next: normal(level),
+  //   source: document.querySelector("#hole-0")
+  // }, {
+  //   status: "normal",
+  //   next: normal(level),
+  //   source: document.querySelector("#hole-1")
+  // }, {
+  //   status: "normal",
+  //   next: normal(level),
+  //   source: document.querySelector("#hole-2")
+  // }, {
+  //   status: "normal",
+  //   next: normal(level),
+  //   source: document.querySelector("#hole-3")
+  // }, {
+  //   status: "normal",
+  //   next: normal(level),
+  //   source: document.querySelector("#hole-4")
+  // }, {
+  //   status: "normal",
+  //   next: normal(level),
+  //   source: document.querySelector("#hole-5")
+  // }];

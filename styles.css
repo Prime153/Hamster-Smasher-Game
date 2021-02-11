@@ -49,6 +49,17 @@ span {
     flex-flow: column wrap;
 }
 
+.win-wrapper {
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    flex-flow: column wrap;
+    background-color: #F0F0F0;
+}
+
+
+
 button {
     margin: 10px;
     border-radius: 10px;
@@ -68,7 +79,7 @@ button:hover {
     height: 50vh;
     width: 100%;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
 }
 
 .hole-zone {
@@ -157,11 +168,48 @@ button:hover {
 
 
 .combo {
-    visibility: hidden;
+    visibility:hidden;
     margin-right: 100px;
     width: 300px;
-    height:300px;
+    height:200px;
 }
 
 
+@media screen and (max-width:860px ) {
+    span {
+        font-size: 3rem;
+    }
+    button {
+        margin: 7px;
+        border-radius: 7px;
+        padding: 7px;
+        font-size: 2rem;
+    }
+}
 
+@media screen and (max-width: 724px) {
+    span {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    .score,.score-value  {
+ 
+        font-size: 2rem;
+        
+    }
+   .combo {
+       height: 100px;
+       width: 150px;
+   }
+   .hamster {
+       width: 80px;
+       height: 80px;
+   }
+    
+}
+
+@media screen and (min-height: 970px) {
+    .wrapper-background {
+        background-size: cover;
+    }
+}
