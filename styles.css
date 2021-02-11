@@ -220,9 +220,10 @@ button:hover {
         background-image: url(./images/background2.jpg);
         background-size: cover;
     }
-    .meter {
-        
-    }
+    .hamster {
+       width: 70px;
+       height: 70px;
+   }
 }
 
 @media screen and (min-height: 970px) {
