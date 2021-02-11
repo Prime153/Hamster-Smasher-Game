@@ -7,6 +7,8 @@ let score = 0;
 let combo = 0;
 let lifes = 0;
 
+
+// Take Level data after click
 for(let elem of Nodelist) {
   elem.addEventListener("click", event => {
     if (event.target.classList.contains("Easy")) {
@@ -29,6 +31,7 @@ for(let elem of Nodelist) {
   });
 }
 
+// Level settings 
 class Level {
   constructor(hearthMeter,level,levelDelay) {
     this.hearthMeter = hearthMeter;
@@ -111,7 +114,9 @@ class Hit extends Level {
     hamster.source.style.cursor = "url(./images/hammer.png),default";
     hamster.status = "smashed";
     hamster.next = super.normal(this.level);
-    hamster.source.children[0].src = './images/hamster-smashed2.png'; // Score counting and combo meter
+    hamster.source.children[0].src = './images/hamster-smashed2.png'; 
+    
+    // Score counting and combo meter
     combo++;
     score = score + 1000;
     
