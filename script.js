@@ -79,7 +79,6 @@ class Level {
     this.hamsters.map(event => {
       if (event.next <= Date.now()) {
         this.nextStatus(event)
-        console.log("działa jadymy dalej");
       }
     })
     requestAnimationFrame(this.nextFrame.bind(this));
@@ -105,7 +104,6 @@ class Hit extends Level {
       $(".hamster-meter").removeChild($(".meter"));
       combo = 0;
       lifes--;
-      console.log(lifes);
       return "";
     } 
   
@@ -117,9 +115,6 @@ class Hit extends Level {
     combo++;
     score = score + 1000;
     
-    console.log(score);
-    console.log(combo);
-  
     if (combo % 3 === 0) {
       $(".combo").style.visibility = "visible"
       setTimeout(() => { 
@@ -175,49 +170,3 @@ function change() {
   $(".wrapper-background").classList.remove("hide");
 } 
 
-
-
-
-
-// class HearthMeterCreator {
-//   constructor(hearthMeter){
-//     this.hearthMeter = hearthMeter
-//   }
-//   createHearth() {
-//     for (let i = 0; i < this.hearthMeter; i++) {
-//       const Hearth = document.createElement("img");
-//       Hearth.classList.add("meter");
-//       Hearth.src = "./images/hearth.png";
-//       document.querySelector(".hamster-meter").appendChild(Hearth);
-//     }
-//     change()
-//   }
-// }
-
-// const normal =  level =>  Date.now() + level;
-// const gone = (level, levelDelay) =>  Date.now() + Math.floor(Math.random() * levelDelay) + level;
-// const hamsters = [{
-  //   status: "normal",
-  //   next: normal(level),
-  //   source: document.querySelector("#hole-0")
-  // }, {
-  //   status: "normal",
-  //   next: normal(level),
-  //   source: document.querySelector("#hole-1")
-  // }, {
-  //   status: "normal",
-  //   next: normal(level),
-  //   source: document.querySelector("#hole-2")
-  // }, {
-  //   status: "normal",
-  //   next: normal(level),
-  //   source: document.querySelector("#hole-3")
-  // }, {
-  //   status: "normal",
-  //   next: normal(level),
-  //   source: document.querySelector("#hole-4")
-  // }, {
-  //   status: "normal",
-  //   next: normal(level),
-  //   source: document.querySelector("#hole-5")
-  // }];
