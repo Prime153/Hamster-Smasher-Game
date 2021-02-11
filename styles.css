@@ -200,7 +200,7 @@ button:hover {
 
 @media screen and (max-width: 594px) {
     .score,.score-value  {
-         margin-top:-80px;
+         margin-top:-60px;
     }
    .combo {
        height: 100px;
