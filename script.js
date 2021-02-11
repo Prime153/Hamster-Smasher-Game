@@ -1,4 +1,4 @@
-const $ = selector => document.querySelector(selector)
+const $ = selector => document.querySelector(selector);
 
 const Nodelist = document.querySelectorAll(".difficulty");
 const scoreValue = $(".score-value");
@@ -62,14 +62,14 @@ class Level {
       next: this.normal(this.level),
       source: $("#hole-5")
     }];
-  }
+  };
   createHearth() {
     for (let i = 0; i < this.hearthMeter; i++) {
       const Hearth = document.createElement("img");
       Hearth.classList.add("meter");
       Hearth.src = "./images/hearth.png";
      $(".hamster-meter").appendChild(Hearth);
-    }
+    };
     change();
   }
   normal() {
@@ -81,7 +81,7 @@ class Level {
   nextFrame() {
     this.hamsters.map(event => {
       if (event.next <= Date.now()) {
-        this.nextStatus(event)
+        this.nextStatus(event);
       }
     })
     requestAnimationFrame(this.nextFrame.bind(this));
@@ -120,37 +120,39 @@ class Hit extends Level {
     combo++;
     score = score + 1000;
     
+    
     if (combo % 3 === 0) {
-      $(".combo").style.visibility = "visible"
+      $(".combo").style.visibility = "visible";
       setTimeout(() => { 
-        $(".combo").style.visibility = "hidden"
-      }, 2000)
+        $(".combo").style.visibility = "hidden";
+      }, 2000);
       score = score + 2000;
     } 
+    $(".score-value").innerText = score;
+
     if(score === 20000) {
       gameOver.win();
     }
-    $(".score-value").innerText = score;
   }
 }
 
 class GameOver {
   
   win() {
-    $(".level-answer").innerText = "You win!"
+    $(".level-answer").innerText = "You win!";
     $(".background").classList.remove("hide");
     $(".win-wrapper").classList.remove("hide")
     $(".wrapper-background").classList.add("hide");
-    $ (".centring").classList.add("hide")
+    $ (".centring").classList.add("hide");
     $(".score-value").innerText = 20000;
     $(".play-again").addEventListener("click", () => {
-      location.reload(true)
+      location.reload(true);
 
     })
   }
   lose() {
-    this.win()
-    $(".level-answer").innerText = "You lose!"
+    this.win();
+    $(".level-answer").innerText = "You lose!";
   }
 }
 
