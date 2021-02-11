@@ -208,6 +208,23 @@ button:hover {
     
 }
 
+@media screen and (max-height:600px) {
+    button {
+        margin: 3px;
+        font-size: 1.7rem;
+    }
+}
+
+@media screen and (max-height:660px) {
+    .wrapper-background {
+        background-image: url(./images/background2.jpg);
+        background-size: cover;
+    }
+    .meter {
+        
+    }
+}
+
 @media screen and (min-height: 970px) {
     .wrapper-background {
         background-size: cover;
