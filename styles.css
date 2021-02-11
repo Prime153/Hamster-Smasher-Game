@@ -39,8 +39,9 @@ body {
 
 span {
     font-size: 4rem;
-    padding: 40px 0;
 }
+
+
 
 .centring {
     border-radius: 20px;
@@ -193,9 +194,13 @@ button:hover {
         text-align: center;
     }
     .score,.score-value  {
- 
         font-size: 2rem;
-        
+    }
+}
+
+@media screen and (max-width: 594px) {
+    .score,.score-value  {
+         margin-top:-80px;
     }
    .combo {
        height: 100px;
@@ -204,8 +209,7 @@ button:hover {
    .hamster {
        width: 80px;
        height: 80px;
-   }
-    
+   }   
 }
 
 @media screen and (max-height:600px) {
@@ -221,9 +225,9 @@ button:hover {
         background-size: cover;
     }
     .hamster {
-       width: 70px;
-       height: 70px;
-   }
+        width: 70px;
+        height: 70px;
+    }
 }
 
 @media screen and (min-height: 970px) {
