@@ -1,34 +1,34 @@
 const $ = selector => document.querySelector(selector);
-
 const Nodelist = document.querySelectorAll(".difficulty");
 const scoreValue = $(".score-value");
-
-let score = 0;
 let combo = 0;
-let lifes = 0;
-
+let score = 0
+let lifes = 0
 
 // Take Level data after click
-for(let elem of Nodelist) {
-  elem.addEventListener("click", event => {
-    if (event.target.classList.contains("Easy")) {
-      const easy = new Level(7,2000,12000);
-      lifes = 7;
-      easy.createHearth();
-      easy.nextFrame();
-
-    } else if (event.target.classList.contains("Normal")) {
-      const normal = new Level(5,1500,8000);
-      lifes = 5;
-      normal.createHearth();
-      normal.nextFrame();
-    } else if (event.target.classList.contains("Hamster")) {
-      const hard = new Level(3,1000,5000);
-      lifes = 3;
-      hard.createHearth();
-      hard.nextFrame();
+class levelPicker {
+  choose() {
+    for(let elem of Nodelist) {
+      elem.addEventListener("click", event => {
+        if (event.target.classList.contains("Easy")) {
+          const easy = new Level(7,2000,12000);
+          lifes = 7
+          easy.createHearth();
+          easy.nextFrame();
+        } else if (event.target.classList.contains("Normal")) {
+          const normal = new Level(5,1500,8000);
+          lifes = 5;
+          normal.createHearth();
+          normal.nextFrame();
+        } else if (event.target.classList.contains("Hamster")) {
+          const hard = new Level(3,1000,5000);
+          lifes = 3;
+          hard.createHearth();
+          hard.nextFrame();
+        }
+      });
     }
-  });
+  }
 }
 
 // Level settings 
@@ -70,7 +70,8 @@ class Level {
       Hearth.src = "./images/hearth.png";
      $(".hamster-meter").appendChild(Hearth);
     };
-    change();
+    $(".background").classList.add("hide");
+    $(".wrapper-background").classList.remove("hide");
   }
   normal() {
     return  Date.now() + this.level;
@@ -109,7 +110,6 @@ class Hit extends Level {
       lifes--;
       return "";
     } 
-  
     const hamster = this.hamsters[parseInt(event.target.dataset.index)];
     hamster.source.style.cursor = "url(./images/hammer.png),default";
     hamster.status = "smashed";
@@ -118,17 +118,17 @@ class Hit extends Level {
     
     // Score counting and combo meter
     combo++;
-    score = score + 1000;
-    
+    score = score + 1000
     
     if (combo % 3 === 0) {
       $(".combo").style.visibility = "visible";
       setTimeout(() => { 
         $(".combo").style.visibility = "hidden";
       }, 2000);
-      score = score + 2000;
+      score = score + 2000
     } 
-    $(".score-value").innerText = score;
+
+    $(".score-value").innerText = score
 
     if(score >= 20000) {
       gameOver.win();
@@ -139,7 +139,7 @@ class Hit extends Level {
 class GameOver {
   
   win() {
-    $(".level-answer").innerText = "You have won!";
+    $(".level-answer").innerText = "You win!";
     $(".background").classList.remove("hide");
     $(".win-wrapper").classList.remove("hide")
     $(".wrapper-background").classList.add("hide");
@@ -152,11 +152,11 @@ class GameOver {
   }
   lose() {
     this.win();
-    $(".level-answer").innerText = "You have lost!";
+    $(".level-answer").innerText = "You lose!";
   }
 }
 
-class Smash  {
+class Smash   {
   click() {
     $('.holes-container').addEventListener('click', event => {
       if (lifes === 1) {
@@ -168,12 +168,11 @@ class Smash  {
   })}
 }
 
+const level = new levelPicker()
 const gameOver = new GameOver();
 const click = new Smash();
 click.click();
+level.choose()
 
-function change() {
-  $(".background").classList.add("hide");
-  $(".wrapper-background").classList.remove("hide");
-} 
+
 
