@@ -139,7 +139,7 @@ class Hit extends Level {
 class GameOver {
   
   win() {
-    $(".level-answer").innerText = "You win!";
+    $(".level-answer").innerText = "You have won!";
     $(".background").classList.remove("hide");
     $(".win-wrapper").classList.remove("hide")
     $(".wrapper-background").classList.add("hide");
@@ -152,7 +152,7 @@ class GameOver {
   }
   lose() {
     this.win();
-    $(".level-answer").innerText = "You lose!";
+    $(".level-answer").innerText = "You have lost!";
   }
 }
 
