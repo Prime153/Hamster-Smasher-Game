@@ -1,5 +1,9 @@
 # Hamster Smasher
-##### I wanted to improve my JavaScript skills, so I decided to make simple game. Player has to smash appearing hamsters. You are gaining points or loosing lifes, if you miss the hamster. I know, hitboxes are awful. Every hamster is going through some function (siting, smash event), when appropriate time is come. 
+##### It is a simple pure JavaScript game. It was created in order to practice my skill
+in this language. The user has to hit the cursor with the hamsters that appear
+from time to time. The game is over when the user reaches the allotted number
+of points or loses all lives. Before starting the game, you can choose the
+difficulty level. The game creates data as you select a level. 
 
 [![Hamster Smasher](https://i.ibb.co/MMH9GTG/hasmter-smasher.jpg "Hamster Smasher")](https://prime153.github.io/Hamster-Smasher-Game/ "Hamster Smasher")
 
