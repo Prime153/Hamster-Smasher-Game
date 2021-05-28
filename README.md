@@ -1,7 +1,5 @@
 # Hamster Smasher
-##### It is a simple pure JavaScript game. It was created in order to practice my skill
-in this language. The user has to hit the cursor with the hamsters that appear
-from time to time. The game is over when the user reaches the allotted number
+##### It is a simple pure JavaScript game. It was created in order to practice my skill in this language. The user has to hit the cursor with the hamsters that appear from time to time. The game is over when the user reaches the allotted number
 of points or loses all lives. Before starting the game, you can choose the
 difficulty level. The game creates data as you select a level. 
 
